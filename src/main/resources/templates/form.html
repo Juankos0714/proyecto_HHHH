@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout :: html}">
+<body>
+    <div th:fragment="content">
+        <div class="title">
+            <div class="subtitle">La Octava</div>
+            <div class="main-title">Vecindad</div>
+        </div>
+        
+        <div class="form-container">
+            <h2 th:text="${apartamento.numero == null ? 'Nuevo Apartamento' : 'Editar Apartamento ' + apartamento.numero}">
+                Nuevo/Editar Apartamento
+            </h2>
+            
+            <form th:action="@{/administrar/guardar}" th:object="${apartamento}" method="post">
+                <input type="hidden" th:if="${apartamento.numero != null}" th:field="*{numero}" />
+                
+                <div class="form-group" th:if="${apartamento.numero == null}">
+                    <label for="numero">Número de Apartamento:</label>
+                    <input type="text" id="numero" th:field="*{numero}" required 
+                           pattern="[0-9]{3}" title="El número debe tener 3 dígitos" />
+                    <small>Ejemplo: 101, 203, 405</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="dueno">Dueño:</label>
+                    <input type="text" id="dueno" th:field="*{dueno}" required />
+                </div>
+                
+                <div class="form-group">
+                    <label for="inquilino">Inquilino:</label>
+                    <input type="text" id="inquilino" th:field="*{inquilino}" />
+                    <small>Dejar vacío si no está ocupado</small>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group half">
+                        <label for="numAdultos">Número de Adultos:</label>
+                        <input type="number" id="numAdultos" th:field="*{numAdultos}" 
+                               min="0" max="10" value="0" />
+                    </div>
+                    
+                    <div class="form-group half">
+                        <label for="numNinos">Número de Niños:</label>
+                        <input type="number" id="numNinos" th:field="*{numNinos}" 
+                               min="0" max="10" value="0" />
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="button primary">Guardar</button>
+                    <a th:href="@{/administrar}" class="button secondary">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout :: html}">
+<body>
+    <div th:fragment="content">
+        <div class="title">
+            <div class="subtitle">La Octava</div>
+            <div class="main-title">Vecindad</div>
+        </div>
+        
+        <div class="finance-header">
+            <h2>Resumen Financiero</h2>
+            <div class="date-range">
+                <span th:text="${#dates.format(#dates.createNow(), 'MMMM yyyy')}">Mayo 2025</span>
+            </div>
+        </div>
+        
+        <div class="finance-summary">
+            <div class="finance-card total">
+                <h3>Total Ingresos</h3>
+                <p class="amount" th:text="${#numbers.formatDecimal(ingresoTotal, 0, 'POINT', 0, 'COMMA') + ' COP'}">783.000 COP</p>
+            </div>
+            <div class="finance-card detail">
+                <h3>Detalle por Servicios</h3>
+                <ul>
+                    <li>
+                        <span class="service-name">Costo Fijo</span>
+                        <span class="service-amount" th:text="${#numbers.formatDecimal(costoFijoTotal, 0, 'POINT', 0, 'COMMA') + ' COP'}">550.000 COP</span>
+                    </li>
+                    <li>
+                        <span class="service-name">Piscina</span>
+                        <span class="service-amount" th:text="${#numbers.formatDecimal(piscinaTotal, 0, 'POINT', 0, 'COMMA') + ' COP'}">26.000 COP</span>
+                    </li>
+                    <li>
+                        <span class="service-name">Juegos</span>
+                        <span class="service-amount" th:text="${#numbers.formatDecimal(juegosTotal, 0, 'POINT', 0, 'COMMA') + ' COP'}">10.000 COP</span>
+                    </li>
+                    <li>
+                        <span class="service-name">Zonas Sociales</span>
+                        <span class="service-amount" th:text="${#numbers.formatDecimal(zonasSocialesTotal, 0, 'POINT', 0, 'COMMA') + ' COP'}">90.000 COP</span>
+                    </li>
+                    <li>
+                        <span class="service-name">Aseo</span>
+                        <span class="service-amount" th:text="${#numbers.formatDecimal(aseoTotal, 0, 'POINT', 0, 'COMMA') + ' COP'}">45.000 COP</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="finance-card discount">
+                <h3>Descuentos Aplicados</h3>
+                <p class="amount" th:text="${#numbers.formatDecimal(descuentosTotal, 0, 'POINT', 0, 'COMMA') + ' COP'}">6.200 COP</p>
+            </div>
+        </div>
+        
+        <div class="chart-container">
+            <h3>Distribución de Ingresos</h3>
+            <div class="finance-chart">
+                <canvas id="incomeChart"></canvas>
+            </div>
+        </div>
+        
+        <div class="payment-status">
+            <h3>Estado de Pagos</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>N° Apto</th>
+                        <th>Inquilino</th>
+                        <th>Total</th>
+                        <th>Estado</th>
+                        <th>Fecha Pago</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="apto : ${apartamentos}">
+                        <td th:text="${apto.numero}">102</td>
+                        <td th:text="${apto.inquilino != null && !apto.inquilino.isEmpty() ? apto.inquilino : '-'}">Ana</td>
+                        <td th:text="${#numbers.formatDecimal(apto.totalPagar, 0, 'POINT', 0, 'COMMA') + ' COP'}">82.000 COP</td>
+                        <td th:class="${apto.pagado ? 'paid' : 'unpaid'}" th:text="${apto.pagado ? 'Pagado' : 'Pendiente'}">Pendiente</td>
+                        <td th:text="${apto.fechaPago != null ? #dates.format(apto.fechaPago, 'dd/MM/yyyy') : '-'}">-</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script th:inline="javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            // Datos para el gráfico
+            const costoFijo = [[${costoFijoTotal}]];
+            const piscina = [[${piscinaTotal}]];
+            const juegos = [[${juegosTotal}]];
+            const zonasSociales = [[${zonasSocialesTotal}]];
+            const aseo = [[${aseoTotal}]];
+            
+            // Crear el gráfico
+            const ctx = document.getElementById('incomeChart').getContext('2d');
+            const incomeChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Costo Fijo', 'Piscina', 'Juegos', 'Zonas Sociales', 'Aseo'],
+                    datasets: [{
+                        data: [costoFijo, piscina, juegos, zonasSociales, aseo],
+                        backgroundColor: [
+                            '#4e73df',
+                            '#1cc88a',
+                            '#36b9cc',
+                            '#f6c23e',
+                            '#e74a3b'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

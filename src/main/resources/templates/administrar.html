@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout :: html}">
+<body>
+    <div th:fragment="content">
+        <div class="title">
+            <div class="subtitle">La Octava</div>
+            <div class="main-title">Vecindad</div>
+        </div>
+        
+        <div class="admin-controls">
+            <a th:href="@{/administrar/calcular}" class="button">Calcular Costos</a>
+            <a th:href="@{/administrar/nuevo}" class="button">Añadir Apartamento</a>
+        </div>
+        
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>N° Apto</th>
+                    <th>Dueño</th>
+                    <th>Inquilino</th>
+                    <th>Adultos</th>
+                    <th>Niños</th>
+                    <th>Piscina</th>
+                    <th>Juegos</th>
+                    <th>Zonas sociales</th>
+                    <th>Aseo</th>
+                    <th>Subtotal</th>
+                    <th>Descuento</th>
+                    <th>Total Pagar</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="apto : ${apartamentos}">
+                    <td th:text="${apto.numero}">102</td>
+                    <td th:text="${apto.dueno}">María</td>
+                    <td th:text="${apto.inquilino != null && !apto.inquilino.isEmpty() ? apto.inquilino : '-'}">Ana</td>
+                    <td th:text="${apto.numAdultos}">2</td>
+                    <td th:text="${apto.numNinos}">2</td>
+                    <td th:text="${#numbers.formatDecimal(apto.costoPiscina, 0, 'POINT', 0, 'COMMA')}">4.000</td>
+                    <td th:text="${apto.costoJuegos > 0 ? #numbers.formatDecimal(apto.costoJuegos, 0, 'POINT', 0, 'COMMA') : '-'}">5.000</td>
+                    <td th:text="${apto.costoZonasSociales > 0 ? #numbers.formatDecimal(apto.costoZonasSociales, 0, 'POINT', 0, 'COMMA') : '-'}">10.000</td>
+                    <td th:text="${apto.costoAseo > 0 ? #numbers.formatDecimal(apto.costoAseo, 0, 'POINT', 0, 'COMMA') : '-'}">15.000</td>
+                    <td th:text="${#numbers.formatDecimal(apto.subtotal, 0, 'POINT', 0, 'COMMA')}">32.000</td>
+                    <td th:text="${apto.descuento > 0 ? #numbers.formatDecimal(apto.descuento, 0, 'POINT', 0, 'COMMA') : '-'}">-</td>
+                    <td th:text="${#numbers.formatDecimal(apto.totalPagar, 0, 'POINT', 0, 'COMMA')}">82.000</td>
+                    <td class="actions">
+                        <a th:href="@{'/administrar/editar/' + ${apto.numero}}" class="edit-btn"><i class="fas fa-edit"></i></a>
+                        <a th:href="@{'/administrar/eliminar/' + ${apto.numero}}" class="delete-btn" 
+                           onclick="return confirm('¿Está seguro de eliminar este apartamento?')">
+                           <i class="fas fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

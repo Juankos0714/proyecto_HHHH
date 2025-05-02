@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout :: html}">
+<body>
+    <div th:fragment="content">
+        <div class="title">
+            <div class="subtitle">La Octava</div>
+            <div class="main-title">Vecindad</div>
+        </div>
+        
+        <a th:href="@{/administrar}" class="button">Administrar</a>
+        
+        <div class="family-image">
+            <img th:src="@{/images/feliz.jpg}" alt="Familia feliz">
+        </div>
+        
+        <div class="home-info">
+            <h2>Bienvenido a La Octava Vecindad</h2>
+            <p>Sistema de administración de condominios donde podrá gestionar los pagos, 
+               inquilinos y servicios del conjunto residencial.</p>
+            
+            <div class="features">
+                <div class="feature">
+                    <i class="fas fa-swimming-pool"></i>
+                    <h3>Piscina</h3>
+                    <p>Administración de costos por uso de piscina.</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-child"></i>
+                    <h3>Áreas de Juegos</h3>
+                    <p>Gestión de zonas recreativas para niños.</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-users"></i>
+                    <h3>Zonas Sociales</h3>
+                    <p>Control de uso de áreas comunes.</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-broom"></i>
+                    <h3>Servicios de Aseo</h3>
+                    <p>Administración de limpieza por piso.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
