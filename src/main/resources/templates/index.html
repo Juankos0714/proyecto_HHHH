@@ -1,54 +1,313 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Octava Vecindad</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-</head>
-<body>
-    <header>
-        <div class="logo">
-            <img th:src="@{/images/logo.PNG}" alt="Logo La Octava Vecindad">
-        </div>
-        <nav>
-            <ul>
-                <li><a href="#" id="inicio-link" class="active">Inicio</a></li>
-                <li><a href="#" id="administrar-link">Administrar</a></li>
-                <li><a href="#" id="base-datos-link">Base de datos</a></li>
-            </ul>
-        </nav>
-        <div class="search-container">
-            <input type="text" class="search-bar" placeholder="Buscar...">
-        </div>
-    </header>
-    
-    <div class="container">
-        <div class="main-content" id="content-area">
-            <div class="title">
-                <div class="subtitle">La Octava</div>
-                <div class="main-title">Vecindad</div>
-            </div>
-            
-            <a href="#" class="button" id="action-button">Administrar</a>
-            
-            <div class="family-image">
-                <img th:src="@{/images/feliz.jpg}" alt="Familia feliz">
-            </div>
-        </div>
-        
-        <div class="sidebar">
-            <div class="motto">La transparencia es nuestra principal arma</div>
-            
-            <div class="chart">
-                <div class="chart-line"></div>
-                <img th:src="@{/images/Captura.PNG}" alt="Estadísticas">
-            </div>
-            
-            <a href="#" class="button" id="finanzas-button">Finanzas</a>
-        </div>
-    </div>
-
-    <script th:src="@{/js/app.js}"></script>
-</body>
-</html>
+ <html lang="es">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>La Octava Vecindad</title>
+     <link rel="stylesheet" href="./styles/style.css">
+ </head>
+ <body>
+     <header>
+         <div class="logo">
+             <img src="./images/logo.PNG" alt="">
+         </div>
+         <nav>
+             <ul>
+                 <li><a href="#" id="inicio-link" class="active">Inicio</a></li>
+                 <li><a href="#" id="administrar-link" >Administrar</a></li>
+                 <li><a href="#" id="base-datos-link">Base de datos</a></li>
+             </ul>
+         </nav>
+         <div class="search-container">
+             <input type="text" class="search-bar" placeholder="">
+         </div>
+     </header>
+     
+     <div class="container">
+         <div class="main-content" id="content-area">
+             <div class="title">
+                 <div class="subtitle">La Octava</div>
+                 <div class="main-title">Vecindad</div>
+             </div>
+             
+             <a href="#" class="button" id="action-button">Administrar</a>
+             
+             <div class="family-image">
+                 <img src="./images/feliz.jpg" alt="Familia feliz">
+             </div>
+         </div>
+         
+         <div class="sidebar">
+             <div class="motto">La transparencia es nuestra principal arma</div>
+             
+             <div class="chart">
+                 <div class="chart-line"></div>
+                 <img src="./images/Captura.PNG" alt="">
+             </div>
+             
+             <a href="#" class="button">Finanzas</a>
+         </div>
+     </div>
+ 
+     <script>
+         // Script para cambiar el contenido según la pestaña seleccionada
+         document.addEventListener('DOMContentLoaded', function() {
+             const inicioLink = document.getElementById('inicio-link');
+             const administrarLink = document.getElementById('administrar-link');
+             const baseDatosLink = document.getElementById('base-datos-link');
+             const contentArea = document.getElementById('content-area');
+             const actionButton = document.getElementById('action-button');
+ 
+             function resetActiveLinks(){
+               inicioLink.classList.remove('active');
+               administrarLink.classList.remove('active');
+               baseDatosLink.classList.remove('active');
+             }
+             
+             administrarLink.addEventListener('click', function(e) {
+                 e.preventDefault();
+                 resetActiveLinks();
+                 administrarLink.classList.add('active');
+                 
+                 contentArea.innerHTML = `
+ <div class="title">
+                         <div class="subtitle">La Octava</div>
+                         <div class="main-title">Vecindad</div>
+                     </div>
+                     
+                     <table>
+                         <thead>
+                             <tr>
+                                 <th>N° Apto</th>
+                                 <th>Dueño</th>
+                                 <th>Inquilino</th>
+                                 <th>Adultos</th>
+                                 <th>Niños</th>
+                                 <th>Piscina</th>
+                                 <th>Juegos</th>
+                                 <th>Zonas sociales</th>
+                                 <th>Aseo</th>
+                                 <th>Subtotal</th>
+                                 <th>Descuento</th>
+                                 <th>Total Pagar</th>
+                             </tr>
+                         </thead>
+                         <tbody>
+                             <tr>
+                                 <td>102</td>
+                                 <td>María</td>
+                                 <td>Ana</td>
+                                 <td>2</td>
+                                 <td>2</td>
+                                 <td>4.000</td>
+                                 <td>5.000</td>
+                                 <td>10.000</td>
+                                 <td>15.000</td>
+                                 <td>32.000</td>
+                                 <td>-</td>
+                                 <td>82.000</td>
+                             </tr>
+                             <tr>
+                                 <td>303</td>
+                                 <td>José</td>
+                                 <td>José</td>
+                                 <td>3</td>
+                                 <td>2</td>
+                                 <td>6.000</td>
+                                 <td>5.000</td>
+                                 <td>10.000</td>
+                                 <td>-</td>
+                                 <td>18.000</td>
+                                 <td>3.600</td>
+                                 <td>64.400</td>
+                             </tr>
+                             <tr>
+                                 <td>202</td>
+                                 <td>Jesús</td>
+                                 <td>Beto</td>
+                                 <td>1</td>
+                                 <td>0</td>
+                                 <td>2.000</td>
+                                 <td>-</td>
+                                 <td>10.000</td>
+                                 <td>15.000</td>
+                                 <td>26.000</td>
+                                 <td>-</td>
+                                 <td>76.000</td>
+                             </tr>
+                             <tr>
+                                 <td>203</td>
+                                 <td>David</td>
+                                 <td>Carlos</td>
+                                 <td>4</td>
+                                 <td>0</td>
+                                 <td>8.000</td>
+                                 <td>-</td>
+                                 <td>10.000</td>
+                                 <td>15.000</td>
+                                 <td>29.000</td>
+                                 <td>-</td>
+                                 <td>79.000</td>
+                             </tr>
+                             <tr>
+                                 <td>302</td>
+                                 <td>Daniel</td>
+                                 <td>Daniel</td>
+                                 <td>3</td>
+                                 <td>0</td>
+                                 <td>6.000</td>
+                                 <td>-</td>
+                                 <td>10.000</td>
+                                 <td>-</td>
+                                 <td>13.000</td>
+                                 <td>2.600</td>
+                                 <td>60.400</td>
+                             </tr>
+                         </tbody>
+                     </table>
+                     
+                     <a href="#" class="button">Probar</a>
+                 `;
+                 
+                 actionButton.textContent = 'Administrar';
+             });
+             
+             baseDatosLink.addEventListener('click', function(e) {
+                 e.preventDefault();
+                 resetActiveLinks();
+                 baseDatosLink.classList.add('active');
+                 
+                 contentArea.innerHTML = `
+                     <div class="title">
+                         <div class="subtitle">La Octava</div>
+                         <div class="main-title">Vecindad</div>
+                     </div>
+                     
+                     <table>
+                         <thead>
+                             <tr>
+                                 <th>N° Apto</th>
+                                 <th>Dueño</th>
+                                 <th>Inquilino</th>
+                                 <th>Adultos</th>
+                                 <th>Niños</th>
+                                 <th>Piscina</th>
+                                 <th>Juegos</th>
+                                 <th>Zonas sociales</th>
+                                 <th>Aseo</th>
+                                 <th>Subtotal</th>
+                                 <th>Descuento</th>
+                                 <th>Total Pagar</th>
+                             </tr>
+                         </thead>
+                         <tbody>
+                             <tr>
+                                 <td>102</td>
+                                 <td>María</td>
+                                 <td>Ana</td>
+                                 <td>2</td>
+                                 <td>2</td>
+                                 <td>4.000</td>
+                                 <td>5.000</td>
+                                 <td>10.000</td>
+                                 <td>15.000</td>
+                                 <td>32.000</td>
+                                 <td>-</td>
+                                 <td>82.000</td>
+                             </tr>
+                             <tr>
+                                 <td>303</td>
+                                 <td>José</td>
+                                 <td>José</td>
+                                 <td>3</td>
+                                 <td>2</td>
+                                 <td>6.000</td>
+                                 <td>5.000</td>
+                                 <td>10.000</td>
+                                 <td>-</td>
+                                 <td>18.000</td>
+                                 <td>3.600</td>
+                                 <td>64.400</td>
+                             </tr>
+                             <tr>
+                                 <td>202</td>
+                                 <td>Jesús</td>
+                                 <td>Beto</td>
+                                 <td>1</td>
+                                 <td>0</td>
+                                 <td>2.000</td>
+                                 <td>-</td>
+                                 <td>10.000</td>
+                                 <td>15.000</td>
+                                 <td>26.000</td>
+                                 <td>-</td>
+                                 <td>76.000</td>
+                             </tr>
+                             <tr>
+                                 <td>203</td>
+                                 <td>David</td>
+                                 <td>Carlos</td>
+                                 <td>4</td>
+                                 <td>0</td>
+                                 <td>8.000</td>
+                                 <td>-</td>
+                                 <td>10.000</td>
+                                 <td>15.000</td>
+                                 <td>29.000</td>
+                                 <td>-</td>
+                                 <td>79.000</td>
+                             </tr>
+                             <tr>
+                                 <td>302</td>
+                                 <td>Daniel</td>
+                                 <td>Daniel</td>
+                                 <td>3</td>
+                                 <td>0</td>
+                                 <td>6.000</td>
+                                 <td>-</td>
+                                 <td>10.000</td>
+                                 <td>-</td>
+                                 <td>13.000</td>
+                                 <td>2.600</td>
+                                 <td>60.400</td>
+                             </tr>
+                         </tbody>
+                     </table>
+                     
+                     <a href="#" class="button">Proba</a>
+                 `;
+                 
+                 actionButton.textContent = 'Proba';
+             });
+             
+             inicioLink.addEventListener('click', function(e) {
+                 e.preventDefault();
+                 resetActiveLinks();
+                 inicioLink.classList.add('active');
+                 
+                 contentArea.innerHTML = `
+                     <div class="title">
+                         <div class="subtitle">La Octava</div>
+                         <div class="main-title">Vecindad</div>
+                     </div>
+                     
+                     <a href="#" class="button">Inicio</a>
+                     
+                     <div class="family-image">
+                         <img src="./images/feliz.jpg" alt="Familia feliz">
+             
+                     </div>
+                 `;
+                 
+                 actionButton.textContent = 'Inicio';
+             });
+             
+             function resetActiveLinks() {
+                 inicioLink.classList.remove('active');
+                 administrarLink.classList.remove('active');
+                 baseDatosLink.classList.remove('active');
+             }
+         });
+     </script>
+ </body>
+ </html>
