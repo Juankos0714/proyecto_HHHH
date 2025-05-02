@@ -178,6 +178,152 @@ table tr:nth-child(even) {
     background-size: 20% 20%;
     background-repeat: repeat;
 }
+/* Estilos para la página de finanzas que puedes añadir a tu style.css */
 
+.finance-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.date-range {
+    background-color: #f2f2f2;
+    padding: 8px 15px;
+    border-radius: 15px;
+    font-weight: bold;
+}
+
+.finance-summary {
+    display: flex;
+    justify-content: space-between;
+    margin: 30px 0;
+    flex-wrap: wrap;
+}
+
+.finance-card {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.finance-card h3 {
+    margin-top: 0;
+    color: #333;
+    font-size: 18px;
+}
+
+.finance-card.total {
+    background-color: #4e73df;
+    color: white;
+    flex: 1;
+    margin-right: 20px;
+}
+
+.finance-card.total h3 {
+    color: white;
+}
+
+.finance-card.detail {
+    flex: 2;
+    margin-right: 20px;
+}
+
+.finance-card.discount {
+    background-color: #1cc88a;
+    color: white;
+    flex: 1;
+}
+
+.finance-card.discount h3 {
+    color: white;
+}
+
+.amount {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.service-name {
+    display: inline-block;
+    width: 60%;
+}
+
+.service-amount {
+    display: inline-block;
+    width: 40%;
+    text-align: right;
+    font-weight: bold;
+}
+
+.finance-card.detail ul {
+    list-style: none;
+    padding: 0;
+}
+
+.finance-card.detail li {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.finance-card.detail li:last-child {
+    border-bottom: none;
+}
+
+.chart-container {
+    margin: 30px 0;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.chart-container h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.finance-chart {
+    height: 300px;
+    width: 100%;
+}
+
+.payment-status {
+    margin: 30px 0;
+}
+
+.paid {
+    color: #1cc88a;
+    font-weight: bold;
+}
+
+.unpaid {
+    color: #e74a3b;
+    font-weight: bold;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #f8f9fc;
+    border-top: 1px solid #e3e6f0;
+}
+
+@media screen and (max-width: 768px) {
+    .finance-summary {
+        flex-direction: column;
+    }
+    
+    .finance-card.total,
+    .finance-card.detail,
+    .finance-card.discount {
+        width: 100%;
+        margin-right: 0;
+    }
+}
 
 

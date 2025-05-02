@@ -86,12 +86,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <script th:inline="javascript">
         document.addEventListener('DOMContentLoaded', function() {
-            // Datos para el gráfico
-            const costoFijo = [[${costoFijoTotal}]];
-            const piscina = [[${piscinaTotal}]];
-            const juegos = [[${juegosTotal}]];
-            const zonasSociales = [[${zonasSocialesTotal}]];
-            const aseo = [[${aseoTotal}]];
+            // Datos para el gráfico - usando la sintaxis correcta de Thymeleaf para JavaScript
+            const costoFijo = /*[[${costoFijoTotal}]]*/ 550000;
+            const piscina = /*[[${piscinaTotal}]]*/ 26000;
+            const juegos = /*[[${juegosTotal}]]*/ 10000;
+            const zonasSociales = /*[[${zonasSocialesTotal}]]*/ 90000;
+            const aseo = /*[[${aseoTotal}]]*/ 45000;
             
             // Crear el gráfico
             const ctx = document.getElementById('incomeChart').getContext('2d');
